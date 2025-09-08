@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [todo, setTodo] = useState(["comb hair", "hello", "yeah"]);
+  const [value, setValue] = useState("");
+
+  function handleChange(event){
+        setValue(event.target.value);
+  }
+
+  function handleSubmit(event){
+    event.preventDefault();
+    setTodo(...todo, value)
+  }
+
+  function RemoveTodo(i) {
+    setTodo(todo.filter((_, index) => ( i !== index)));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="textInput">Enter Text:</label>
+      <input
+        id="textInput"
+        type="text"
+        value={inputValue}
+        onChange={handleChange}
+      />
+      <button type="submit">Submit</button>
+    </form>
+    <ul>
+      {todo.map((data, index) => (
+        <li key={index}>
+          {data} <button onClick={() => RemoveTodo(index)}>Delete</button>
+        </li>
+      ))}
+    </ul>
+    </>
   );
 }
 
