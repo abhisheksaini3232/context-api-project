@@ -12,6 +12,7 @@ function App() {
   function handleSubmit(event) {
     event.preventDefault();
     setTodo([...todo, value]);
+    setValue("");
   }
 
   function RemoveTodo(i) {
