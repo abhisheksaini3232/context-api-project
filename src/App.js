@@ -5,39 +5,38 @@ function App() {
   const [todo, setTodo] = useState(["comb hair", "hello", "yeah"]);
   const [value, setValue] = useState("");
 
-  function handleChange(event){
-        setValue(event.target.value);
+  function handleChange(event) {
+    setValue(event.target.value);
   }
 
-  function handleSubmit(event){
+  function handleSubmit(event) {
     event.preventDefault();
-    setTodo(...todo, value)
+    setTodo([...todo, value]);
   }
 
   function RemoveTodo(i) {
-    setTodo(todo.filter((_, index) => ( i !== index)));
+    setTodo(todo.filter((_, index) => i !== index));
   }
 
   return (
-
     <>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="textInput">Enter Text:</label>
-      <input
-        id="textInput"
-        type="text"
-        value={inputValue}
-        onChange={handleChange}
-      />
-      <button type="submit">Submit</button>
-    </form>
-    <ul>
-      {todo.map((data, index) => (
-        <li key={index}>
-          {data} <button onClick={() => RemoveTodo(index)}>Delete</button>
-        </li>
-      ))}
-    </ul>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="textInput">Enter Text:</label>
+        <input
+          id="textInput"
+          type="text"
+          value={value}
+          onChange={handleChange}
+        />
+        <button type="submit">Submit</button>
+      </form>
+      <ul>
+        {todo.map((data, index) => (
+          <li key={index}>
+            {data} <button onClick={() => RemoveTodo(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
