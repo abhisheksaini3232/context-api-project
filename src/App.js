@@ -1,22 +1,22 @@
 import "./App.css";
-import { useState } from "react";
+import { useContext } from "react";
+import { TodoContext } from "./context/Todo";
 
 function App() {
-  const [todo, setTodo] = useState(["comb hair", "hello", "yeah"]);
-  const [value, setValue] = useState("");
+  const todoContext = useContext(TodoContext);
 
   function handleChange(event) {
-    setValue(event.target.value);
+    todoContext.setValue(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    setTodo([...todo, value]);
-    setValue("");
+    todoContext.setTodo([...todoContext.todo, todoContext.value]);
+    todoContext.setValue("");
   }
 
   function RemoveTodo(i) {
-    setTodo(todo.filter((_, index) => i !== index));
+    todoContext.setTodo(todoContext.todo.filter((_, index) => i !== index));
   }
 
   return (
@@ -26,13 +26,13 @@ function App() {
         <input
           id="textInput"
           type="text"
-          value={value}
+          value={todoContext.value}
           onChange={handleChange}
         />
         <button type="submit">Submit</button>
       </form>
       <ul>
-        {todo.map((data, index) => (
+        {todoContext.todo.map((data, index) => (
           <li key={index}>
             {data} <button onClick={() => RemoveTodo(index)}>Delete</button>
           </li>
