@@ -1,10 +1,12 @@
-import "./App.css";
+import React from "react";
 
-function App() {
+const Counter = () => {
   return (
-    <>
-      <h1>Context API</h1>;<h2>Hello</h2>
-    </>
+    <div className="flex items-center justify-center h-screen bg-red-200">
+            <button>Increment</button>      <h1>0</h1>     {" "}
+      <button>Decrement</button>   {" "}
+    </div>
   );
-}
-export default App;
+};
+
+export default Counter;
